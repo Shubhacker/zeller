@@ -1,12 +1,12 @@
 package main
 
+// interface for methods
 type Checkout interface {
 	Scan([]string)
 	Total() float64
 }
 
-var price map[string]float64
-
+// Required structs - Later can be moved to independent package specific for model
 type Rules struct {
 	pricingRules map[string]OfferPrice
 	ActualPrices map[string]float64
@@ -48,8 +48,8 @@ func (r *Rules) Total() float64 {
 	return orderValue
 }
 
+// RuleConditions - Helper function
 func RuleConditions(orderQuantity float64, actualPrice float64, data OfferPrice) float64 {
-
 	var orderValue float64
 
 	switch data.Condition {
@@ -80,5 +80,4 @@ func RuleConditions(orderQuantity float64, actualPrice float64, data OfferPrice)
 	}
 
 	return orderValue
-
 }
